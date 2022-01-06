@@ -1,0 +1,10 @@
+{
+  "name": "first",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "<zlysanskiy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}
