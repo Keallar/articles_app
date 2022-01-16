@@ -8,30 +8,40 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    # Rails.logger.info('New article')
     @article = Article.new
   end
 
   def create
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(article_params)
     # render plain: @article.inspect
     if @article.save
       flash[:notice] = 'Article was created succesfully.'
+      Rails.logger.info('New article')
       # redirect_to article_path(@article)
       redirect_to @article
     else
-      render 'new'
+      render action: 'new'
     end
   end
 
-  def edit; end
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      redirect_to @article, notice: 'Article was succesfully updated!'
+    else
+      render action: 'edit'
+    end
+  end
 
   def destroy; end
 
   private
 
-  def method_name
-    
+  def article_params
+    params.require(:article).permit(:title, :description)
   end
-  
 end
