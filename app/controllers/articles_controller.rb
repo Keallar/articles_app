@@ -1,11 +1,12 @@
 class ArticlesController < ApplicationController
+  before_action :set_article, only: [:edit, :update, :show, :destroy]
+  after_action :previous_url, only: [:new]
+
   def index
     @articles = Article.all
   end
 
-  def show
-    @article = Article.find(params[:id])
-  end
+  def show; end
 
   def new
     @article = Article.new
@@ -20,16 +21,13 @@ class ArticlesController < ApplicationController
       # redirect_to article_path(@article)
       redirect_to @article
     else
-      render action: 'new'
+      render :new
     end
   end
 
-  def edit
-    @article = Article.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       redirect_to @article, notice: 'Article was succesfully updated!'
     else
@@ -38,12 +36,20 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    @article.destroy
-    redirect_to articles_path
+    @article.destroy if @article.present?
+    redirect_to(articles_path)
   end
 
+  def previous_url
+    session[:return_to] ||= request.referer
+  end
+  
+
   private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
   def article_params
     params.require(:article).permit(:title, :description)
