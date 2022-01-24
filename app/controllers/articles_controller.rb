@@ -15,10 +15,10 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     # render plain: @article.inspect
-    if @article.save
+    if @article.valid?
+      @article.save
       flash[:notice] = 'Article was created succesfully.'
       Rails.logger.info('New article')
-      # redirect_to article_path(@article)
       redirect_to @article
     else
       render :new
