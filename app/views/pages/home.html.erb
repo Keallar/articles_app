@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>First</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<div id="page-content">
+  <div class="container" id="home-container">
+    <div class="jumbotron text-center text-black">
+      <h1 class="display-4">Alpha Blog</h1>
+      <p class="lead">Это простой компонент в стиле jumbotron для привлечения дополнительного внимания к избранному контенту или информации.</p>
+      <hr class="my-4">
+      <p>Он использует служебные классы для типографики и интервалов для размещения содержимого в более крупном контейнере.</p>
+      <a class="btn btn-success btn-lg" href="#" role="button">Sign up</a>
+    </div>
+  </div>
+</div>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+<footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white">
+  <div class="container text-center">
+    <small>Copyright &copy; <%= link_to "Eugene", about_path, class: "text-white" %></small>
+  </div>
+</footer>
 
-  <body>
-    <%= yield %>
-    <p>This is home page!</p>
-  </body>
-</html>
+

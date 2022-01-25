@@ -12,8 +12,8 @@
   <tbody>
     <%@articles.each do |article| %>
       <tr>
-        <td><%= article.title %></td>
-        <td><%= article.description %></td>
+        <td><%= article.title %> | </td>
+        <td><%= article.description %> | </td>
         <td><%= link_to "Show", article %></td>
         <td><%= link_to "Edit", edit_article_path(article) %></td>  
         <td><%= link_to "Delete", article, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
@@ -26,4 +26,10 @@
 
 <p>
   <%= link_to "New article", new_article_path %>
+</p>
+<p>
+  <%= link_to "Home page", root_path %>
+</p>
+<p>
+  <%= link_to "Back", :back%>
 </p>
