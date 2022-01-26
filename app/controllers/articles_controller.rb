@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
       @article.save
       flash[:notice] = 'Article was created succesfully.'
       Rails.logger.info('New article')
-      redirect_to @article
+      redirect_to :new
     else
       render :new
     end

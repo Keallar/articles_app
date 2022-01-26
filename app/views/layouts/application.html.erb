@@ -15,13 +15,11 @@
 
   <body class="d-flex flex-column">
     <%= render "layouts/navigation" %>
-    <%= render 'layouts/messages' %>
-    <%= yield %>
-    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white">
-      <div class="container text-center">
-        <small>Copyright &copy; <%= link_to "Keallar", about_path, class: "text-white" %></small>
-      </div>
-    </footer>
+    <div id="page-content">
+      <%= render 'layouts/messages' %>
+      <%= yield %>
+    </div>
+    <%= render "layouts/footer" %>
   </body>
 </html>
 
