@@ -14,7 +14,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # render plain: @article.inspect
     if @article.valid?
       @article.save
       flash[:notice] = 'Article was created succesfully.'
@@ -36,14 +35,10 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy if @article.present?
-    redirect_to(articles_path)
+    @article.destroy 
+    Rails.logger.info("Article #{@article.title} deleted")
+    redirect_to articles_path notice: 'Article was succesfully destroyed!'
   end
-
-  def previous_url
-    session[:return_to] ||= request.referer
-  end
-  
 
   private
 
@@ -53,5 +48,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def previous_url
+    session[:return_to] ||= request.referer
   end
 end
