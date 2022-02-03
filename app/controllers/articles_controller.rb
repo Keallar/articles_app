@@ -1,9 +1,10 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:edit, :update, :show, :destroy]
+  before_action :set_article, only: %i[edit update show destroy]
   after_action :previous_url, only: [:new]
 
   def index
     @articles = Article.all
+    # store_last_index_page
   end
 
   def show; end

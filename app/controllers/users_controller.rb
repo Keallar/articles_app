@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :destroy]
+  before_action :set_user, only: %i[edit update show destroy]
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+    @articles = @user.articles
+  end
 
   def new
     @user = User.new
@@ -16,23 +19,21 @@ class UsersController < ApplicationController
       redirect_to articles_path
     else
       render :new
-    end      
+    end
   end
 
   def edit; end
 
-  def update 
+  def update
     if @user.update(user_params)
       redirect_to articles_path, notice: "User #{@user.username} was succesfully updated!"
     else
-      render action: 'edit'
+      render :edit
     end
   end
 
-  def destroy
-    
-  end
-  
+  def destroy; end
+
   private
 
   def user_params
