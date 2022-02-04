@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user.save
       flash[:notice] = "User #{@user.username} was succesfully signed up"
       Rails.logger.info("User #{@user.username} created")
-      redirect_to articles_path
+      redirect_to @user
     else
       render :new
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to articles_path, notice: "User #{@user.username} was succesfully updated!"
+      redirect_to @user, notice: "User #{@user.username} was succesfully updated!"
     else
       render :edit
     end
