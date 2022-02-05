@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   after_action :previous_url, only: [:new]
 
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 5)
     # store_last_index_page
   end
 
