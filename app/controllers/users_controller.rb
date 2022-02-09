@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
     @articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
@@ -18,6 +17,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.valid?
       @user.save
+      session[:user_id] = @user.id
       flash[:notice] = "User #{@user.username} was succesfully signed up"
       Rails.logger.info("User #{@user.username} created")
       redirect_to @user

@@ -23,19 +23,17 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><%= link_to "All articles", articles_path, class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>
-              <li><%= link_to "Create new article", new_article_url, class: "dropdown-item" %> </li>
+              <li><%= link_to "Create new article", new_article_url, class: "dropdown-item" %></li>
             </ul>
-
-            <%# <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Users actions
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to "Edit account", edit_users_path(@user), class: "dropdown-item" %></li>
-            </ul> %>
-
           </li>
         </ul>
-        <%= link_to "Sign up",  signup_path, class: "btn btn-success btn-lg", role: "button" %>
+        <% if logged_in? %> 
+          <%= link_to current_user.username, user_path(current_user), class: "btn btn-outline-success btn-lg" %>
+          <%= button_to "Logout", logout_path, class: "btn btn-outline-success btn-lg", method: :delete, role: "button", data: { confirm: 'Are you sure?' } %>
+        <% else %>
+          <%= link_to "Log in", login_path, class: "btn btn-outline-success btn-lg", role: "button" %>
+          <%= link_to "Sign up", signup_path, class: "btn btn-success btn-lg", role: "button" %>
+        <% end %>
       </div>
     </div>
   </nav>
