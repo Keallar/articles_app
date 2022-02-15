@@ -41,7 +41,8 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy 
     Rails.logger.info("Article #{@article.title} deleted")
-    redirect_to articles_path notice: 'Article was succesfully destroyed!'
+    flash[:notice] = 'Article was succesfully destroyed!'
+    redirect_to articles_path
   end
 
   private
