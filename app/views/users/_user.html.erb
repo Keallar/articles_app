@@ -10,8 +10,13 @@
           <%= link_to gravatar_for(user, size: 150), user %>
           <p class="card-text"><%= pluralize(user.articles.count, 'article') %></p>
           <%= link_to "Read", user, class: "btn btn-outline-success" %>
-          <% if logged_in? && user == current_user %>
-            <%= link_to "Edit", edit_user_path(user), class: "btn btn-outline-primary" %>
+          <% if logged_in? %> 
+            <% if user == current_user %>
+              <%= link_to "Edit", edit_user_path(user), class: "btn btn-outline-primary" %>
+            <% end %>
+            <% if user.admin? %>
+              <%= button_to 'Delete', user_path(user), method: :delete, data: {confirm: 'Are you sure?'} , class: "btn btn-outline-danger" %>
+            <% end %>
           <% end %>
         </div>
         <div class="card-footer text-muted">
