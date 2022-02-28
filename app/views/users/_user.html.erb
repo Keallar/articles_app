@@ -14,7 +14,7 @@
             <% if user == current_user %>
               <%= link_to "Edit", edit_user_path(user), class: "btn btn-outline-primary" %>
             <% end %>
-            <% if user.admin? %>
+            <% if user.admin? && current_user.admin? %>
               <%= button_to 'Delete', user_path(user), method: :delete, data: {confirm: 'Are you sure?'} , class: "btn btn-outline-danger" %>
             <% end %>
           <% end %>

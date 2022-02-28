@@ -1,12 +1,11 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[edit update show destroy]
+  before_action :set_article, only: %i[show edit update destroy]
   before_action :require_user, except: %i[index show]
   before_action :require_same_user, only: %i[edit update destroy]
   after_action :previous_url, only: [:new]
 
   def index
     @articles = Article.paginate(page: params[:page], per_page: 5)
-    # store_last_index_page
   end
 
   def show; end
@@ -48,7 +47,11 @@ class ArticlesController < ApplicationController
   private
 
   def set_article
-    @article = Article.find(params[:id])
+    begin
+      @artilce = Article.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_url, flash: { error: 'Article not found' }
+    end
   end
 
   def article_params
