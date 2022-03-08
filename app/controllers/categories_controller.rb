@@ -8,13 +8,22 @@ class CategoriesController < ApplicationController
   def new
     @category = Category.new
   end
+
+  def create 
+    @category = Category.new(category_params)
+    if @category.valid?
+      @category.save
+      flash[:notice] = 'Category was created!'
+      redirect_to @category
+    else
+      render :new
+    end
+  end
   
   def show; end
 
   def destroy
     @category.destroy
-    # flash[:notice] = 'Article was succesfully destroyed!'
-    # redirect_to articles_path
   end
 
   private
@@ -26,5 +35,4 @@ class CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(:name)
   end
-
 end
