@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  def create 
+  def create
     @category = Category.new(category_params)
     if @category.valid?
       @category.save
@@ -20,7 +20,9 @@ class CategoriesController < ApplicationController
     end
   end
   
-  def show; end
+  def show
+    # @category = Category.find
+  end
 
   def destroy
     @category.destroy

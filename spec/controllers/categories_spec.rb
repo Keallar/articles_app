@@ -16,18 +16,19 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   describe 'GET /show' do
-    # let(:category) { create(:category) }
-
     it 'should show category' do
       @category = Category.create(name: 'Sports')
-      get :show, id: @category.id
-      expect(category).to have_http_status(:success)
+      get :show, params: { id: @category.id }
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe 'POST /create' do
     it 'should create category' do
-
+      post :create, params: { category: { name: 'Traveling' } }
+      expect(response).to redirect_to(assigns(:category))
     end
+
+
   end
 end
