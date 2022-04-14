@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show destroy]
 
   def index
-    @categories = Category.all
+    @categories = Category.paginate(page: params[:page], per_page: 5)
   end
 
   def new
@@ -20,9 +20,7 @@ class CategoriesController < ApplicationController
     end
   end
   
-  def show
-    # @category = Category.find
-  end
+  def show; end
 
   def destroy
     @category.destroy
