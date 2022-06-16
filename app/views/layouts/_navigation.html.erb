@@ -16,13 +16,25 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Articles actions
+              Articles
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><%= link_to "All articles", articles_path, class: "dropdown-item" %></li>
+              <li><%= link_to "View articles", articles_path, class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>
               <% if logged_in? %>
                 <li><%= link_to "Create new article", new_article_url, class: "dropdown-item" %></li>
+              <% end %>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </ul>
+          </li>
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to "View categories", categories_path, class: "dropdown-item" %></li>
+              <% if logged_in? && current_user.admin? %>
+                <li><%= link_to "Create new category", new_category_url, class: "dropdown-item" %></li>
               <% end %>
             </ul>
           </li>
