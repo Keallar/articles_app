@@ -3,12 +3,12 @@ class User < ApplicationRecord
 
   has_many :articles, dependent: :destroy
 
-  validates :username, presence: true, 
-                       uniqueness: { case_sensitive: false }, 
+  validates :username, presence: true,
+                       uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 25 }
   VALIDATE_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, 
-                    uniqueness: { case_sensitive: false }, 
+  validates :email, presence: true,
+                    uniqueness: { case_sensitive: false },
                     length: { maximum: 100 },
                     format: { with: VALIDATE_EMAIL_REGEX }
 

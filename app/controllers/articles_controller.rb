@@ -38,7 +38,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy 
+    @article.destroy
     Rails.logger.info("Article #{@article.title} deleted")
     flash[:notice] = 'Article was succesfully destroyed!'
     redirect_to articles_path
@@ -49,13 +49,14 @@ class ArticlesController < ApplicationController
   def set_article
     begin
       @artilce = Article.find(params[:id])
+      Rails.logger.info "#{@article.inspect}"
     rescue ActiveRecord::RecordNotFound
       redirect_to root_url, flash: { error: 'Article not found' }
     end
   end
 
   def article_params
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, category_ids: [])
   end
 
   def require_same_user

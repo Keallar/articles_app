@@ -22,5 +22,5 @@ end
   Article.create(title: "Article_#{i}",
                  description: Faker::Book.title,
                  user_id: User.find(User.pluck(:id).sample).id,
-                 category_id: Category.find(Category.pluck(:id).sample).id)
+                 category_ids: Category.find(Category.pluck(:id).sample).id)
 end
