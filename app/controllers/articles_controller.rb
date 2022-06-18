@@ -8,7 +8,9 @@ class ArticlesController < ApplicationController
     @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
-  def show; end
+  def show
+    @article = Article.find(params[:id])
+  end
 
   def new
     @article = Article.new
@@ -48,7 +50,7 @@ class ArticlesController < ApplicationController
 
   def set_article
     begin
-      @artilce = Article.find(params[:id])
+      @article = Article.find(params[:id])
       Rails.logger.info "#{@article.inspect}"
     rescue ActiveRecord::RecordNotFound
       redirect_to root_url, flash: { error: 'Article not found' }

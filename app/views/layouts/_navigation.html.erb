@@ -51,6 +51,7 @@
             </li>
           <% end %>
         </ul>
+        <div class="m-1">
         <% if logged_in? %> 
           <%= link_to current_user.username, user_path(current_user), class: "btn btn-outline-success btn-lg" %>
           <%= button_to "Logout", logout_path, class: "btn btn-outline-success btn-lg", method: :delete, role: "button", data: { confirm: 'Are you sure?' } %>
@@ -58,6 +59,7 @@
           <%= link_to "Log in", login_path, class: "btn btn-outline-success btn-lg", role: "button" %>
           <%= link_to "Sign up", signup_path, class: "btn btn-success btn-lg", role: "button" %>
         <% end %>
+        </div>
       </div>
     </div>
   </nav>
