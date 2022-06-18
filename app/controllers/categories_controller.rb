@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show destroy]
-  before_action :require_admin, except: %i[index show]
+  before_action :set_category, only: %i[show update edit destroy]
+  before_action :require_admin, except: %i[index edit show]
 
   def index
     @categories = Category.paginate(page: params[:page], per_page: 5)
@@ -21,7 +21,19 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @articles = @category.articles.paginate(page: params[:page], per_page: 5)
+  end
+
+  def edit; end
+
+  def update
+    if @category.update(category_params)
+      redirect_to @category, notice: "Category #{@category.name} was successfully updated!"
+    else
+      render :edit
+    end
+  end
 
   def destroy
     @category.destroy
